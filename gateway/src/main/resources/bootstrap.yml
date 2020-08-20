@@ -1,0 +1,29 @@
+server:
+  port: 8080
+  max-http-header-size: 32768
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    config:
+      enabled: false
+    gateway:
+      routes:
+        - id: movie-service
+          uri: http://localhost:7701/
+          predicates:
+            - Path=/movie-service/**
+          filters:
+            - RewritePath=/movie-service/(?<segment>.*), /$\{segment}
+        - id: customer-service
+          uri: http://localhost:7702/
+          predicates:
+            - Path=/customer-service/**
+          filters:
+            - RewritePath=/customer-service/(?<segment>.*), /$\{segment}

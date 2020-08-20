@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: native
+  application:
+    name: configuration-server
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: /config, @project.build.directory@/../../config/src/main/resources/config
+
+server:
+  port: 9090

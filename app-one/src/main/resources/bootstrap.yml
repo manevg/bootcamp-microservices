@@ -1,0 +1,25 @@
+server:
+  port: 9091
+
+spring:
+  application:
+    name: app-one
+  cloud:
+    enabled: true
+    config:
+      uri: http://localhost:9090
+      failFast: true
+      retry:
+        initial-interval: 1000
+        max-attempts: 60
+        max-interval: 1000
+
+eureka:
+  client:
+    enabled: true
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    instance:
+      preferIpAddress: true
